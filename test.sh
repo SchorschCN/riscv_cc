@@ -8,8 +8,8 @@
 #!/bin/zsh
 
 assert() {
-	expected="$1"
-	input="$2"
+	expected="$2"
+	input="$1"
 
 	./rvcc $input > tmp.s || exit
 
@@ -27,8 +27,8 @@ assert() {
 	fi
 }
 
-assert 0 0
-assert 42 42
+assert 1-2+3 2
+assert 2+1-5 -2
 
 echo OK
 

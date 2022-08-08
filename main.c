@@ -15,9 +15,26 @@ int main(int argc, char **argv)
 		fprintf(stderr, "%s: invalid number of arguments\n", argv[0]);
 		return 1;
 	}
+	char *expr=argv[1];
 	printf(".globl main\n");
 	printf("main:\n");
-	printf(" li a0, %d\n", atoi(argv[1]));
+	printf("  li a0, %ld\n",strtol(expr,&expr,10));
+	while(*expr)
+	{
+		if(*expr=='+')
+		{
+			++expr;
+			printf("  addi a0, a0, %ld\n", strtol(expr,&expr,10));
+			continue;
+		}
+		if(*expr=='-')
+		{
+			++expr;
+			printf("  addi a0, a0, -%ld\n", strtol(expr,&expr,10));
+			continue;
+		}
+	}
+//	printf(" li a0, %d\n", atoi(argv[1]));
 	printf(" ret\n");
 
 	return 0;
